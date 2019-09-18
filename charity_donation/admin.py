@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import CategoryModel, InstitutionModel, DonationModel
 
-# Register your models here.
+admin.site.register(CategoryModel)
+admin.site.register(InstitutionModel)
+admin.site.register(DonationModel)
+

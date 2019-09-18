@@ -12,6 +12,9 @@ TYPES = {
 class CategoryModel(models.Model):
     name = models.CharField(max_length=128)
 
+    def __str__(self):
+        return self.name
+
 
 class InstitutionModel(models.Model):
     name = models.CharField(max_length=128)
@@ -19,9 +22,12 @@ class InstitutionModel(models.Model):
     type = models.CharField(choices=TYPES, default='fund', max_length=6)
     categories = models.ManyToManyField(CategoryModel)
 
+    def __str__(self):
+        return self.name
+
 
 class DonationModel(models.Model):
-    quantity = models.IntegerField()
+    bag_quantity = models.IntegerField()
     categories = models.ManyToManyField(CategoryModel)
     institution = models.ForeignKey(InstitutionModel, on_delete=models.DO_NOTHING)
     address = models.TextField()
