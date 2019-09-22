@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views import View
-from django.db.models import Sum, Count
+from django.db.models import Sum
 from charity_donation.models import DonationModel, InstitutionModel
+from django.contrib.auth.models import User
 
 
 class LandingPageView(View):
@@ -31,5 +32,25 @@ class LoginView(View):
 
 
 class RegisterView(View):
+    def verify(self, *args):
+        valid = True
+        for item in args:
+            if item is None or len(item) == 0:
+                valid = False
+        return valid
+
     def get(self, request):
+        return render(request, 'register.html')
+
+    def post(self, request):
+        name = request.POST['name']
+        surname = request.POST['surname']
+        email = request.POST['email']
+        password = request.POST['password']
+        password2 = request.POST['password2']
+
+        if password == password2 and self.verify( name, surname, email, password, password2):
+            User.objects.create_user(username=email, first_name=name, last_name=surname,
+                                     email=email, password=password)
+            return render(request, 'login.html')
         return render(request, 'register.html')
