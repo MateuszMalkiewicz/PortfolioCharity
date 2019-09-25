@@ -24,7 +24,13 @@ class LandingPageView(View):
 
 class AddDonationView(View):
     def get(self, request):
-        return render(request, 'form.html')
+        if request.user.is_authenticated:
+            return render(request, 'form.html')
+        else:
+            return redirect('/login')
+
+    def post(self, request):
+        pass
 
 
 class LoginView(View):

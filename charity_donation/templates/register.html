@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <section class="login-page">
+    <section id="register-form" class="login-page">
     {% if not_registered %}
         <h2>Nie ma takiego użytkownika</h2>
     {% endif %}
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-group form-group--buttons">
-          <a href="{% url 'login' %}" class="btn btn--without-border">Zaloguj się</a>
+          <a href="{% url 'login' %}#login-form" class="btn btn--without-border">Zaloguj się</a>
           <button class="btn" type="submit">Załóż konto</button>
         </div>
 
