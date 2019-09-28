@@ -2,13 +2,11 @@
 {% block content %}
 
     <section id="register-form" class="login-page">
-    {% if not_registered %}
-        <h2>Nie ma takiego użytkownika</h2>
-    {% endif %}
     {% if incorrect %}
         <h2>Błędne dane, poprawnie wypełnij pola poniżej</h2>
+    {% else %}
+        <h2>Załóż konto</h2>
     {% endif %}
-      <h2>Załóż konto</h2>
       <form method="post">
         {% csrf_token %}
         <div class="form-group">
