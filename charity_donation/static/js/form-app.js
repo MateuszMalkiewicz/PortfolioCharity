@@ -21,7 +21,7 @@ $(function(){
 
         for(let i=0; i<categories.length; i++) {
             if (categories[i].checked) {
-                let categoryName = categories[i].getAttribute('value');
+                let categoryName = categories[i].getAttribute('data-value');
                 for(let j=0; j<institutionCategories.length; j++){
                     let categoryList = institutionCategories[j].getAttribute('data-category').split('; ');
                     if(!checkIfContains(categoryName, categoryList)){
@@ -52,10 +52,11 @@ $(function(){
         let chosenCategories = '';
         for (let i = 0; i < categories.length; i++) {
             if (categories[i].checked) {
-                let category = categories[i].getAttribute('value');
-                chosenCategories += ' ' + category;
+                let category = categories[i].getAttribute('data-value');
+                chosenCategories += ' ' + category + ',';
             }
         }
+        chosenCategories = chosenCategories.substring(0, chosenCategories.length - 1);
 
         let institutions = $('div[data-step=\'3\'] div label input');
         let chosenInstitution = '';

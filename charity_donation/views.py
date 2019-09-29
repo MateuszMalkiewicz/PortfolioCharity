@@ -33,7 +33,19 @@ class AddDonationView(View):
             return redirect('/login')
 
     def post(self, request):
-        pass
+        donation = DonationModel.objects.create(bag_quantity=request.POST['bags'],
+                                                categories=request.POST['categories'],
+                                                institution=request.POST['institution'],
+                                                address=request.POST['address'],
+                                                phone_number=request.POST['phone'],
+                                                city=request.POST['city'],
+                                                zip_code=request.POST['postcode'],
+                                                pick_up_date=request.POST['data'],
+                                                pick_up_time=request.POST['time'],
+                                                pick_up_comment=request.POST['more_info'],
+                                                user=request.user)
+        donation.save()
+        return redirect('/', {'confirmed': True})
 
 
 class LoginView(View):
@@ -80,3 +92,10 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect('/')
+
+
+class ProfileView(View):
+    def get(self, request):
+        return render(request, 'user-panel.html')
+
+

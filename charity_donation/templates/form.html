@@ -35,7 +35,8 @@
                 <input
                   type="checkbox"
                   name="categories"
-                  value="{{ category.name }}"
+                  value="{{ category }}"
+                  data-value="{{ category.name }}"
                 />
                 <span class="checkbox"></span>
                 <span class="description">
@@ -80,7 +81,7 @@
                   >
               </div>
               <label>
-                <input type="radio" name="organization" value="{{ institution.get_type_display }} {{ institution.name }}" />
+                <input type="radio" name="organization" value="{{ institution }}" />
                 <span class="checkbox radio"></span>
                 <span class="description">
 
