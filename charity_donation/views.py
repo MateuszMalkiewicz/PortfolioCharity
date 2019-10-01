@@ -96,7 +96,16 @@ class LogoutView(View):
 
 class ProfileView(View):
     def get(self, request):
-        context = {'donations': DonationModel.objects.filter(user=request.user)}
+        context = {'donations': DonationModel.objects.filter(user=request.user).order_by('is_taken')}
         return render(request, 'user-panel.html', context)
+
+
+class ArchiveDonationView(View):
+    def get(self, request, donation_id):
+        donation = DonationModel.objects.get(id=donation_id)
+        donation.is_taken = True
+        donation.save()
+        return redirect('/profile')
+
 
 
