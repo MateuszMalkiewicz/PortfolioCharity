@@ -1,9 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
     <section class="login-page">
-        <h2>Twoje dane:</h2>
+        <h2>Twoje dane</h2>
         <p class="user-info">Imię: {{ user.first_name }}</p>
         <p class="user-info">Nazwisko: {{ user.last_name }}</p>
         <p class="user-info">Adres e-mail: {{ user.email }}</p>
+
+        <h2>Przekazane dary</h2>
+        {% for donation in donations %}
+            <p class="user-info">
+                Przekazano {{ donation.bag_quantity }} worków z:
+            </p>
+                <ul class="user-info">
+                    {% for category in donation.categories.all %}
+                        <li>{{ category.name }}</li>
+                    {% endfor %}
+                </ul>
+            <p class="user-info">
+                Otrzymała je {{ donation.institution.get_type_display }}
+                {{ donation.institution }} <br>
+                Odbiór w dniu {{ donation.pick_up_date }} o godzinie {{ donation.pick_up_time }}
+            </p>
+            <br><br>
+        {% endfor %}
     </section>
 {% endblock %}

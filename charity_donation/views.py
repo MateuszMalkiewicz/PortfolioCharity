@@ -96,6 +96,7 @@ class LogoutView(View):
 
 class ProfileView(View):
     def get(self, request):
-        return render(request, 'user-panel.html')
+        context = {'donations': DonationModel.objects.filter(user=request.user)}
+        return render(request, 'user-panel.html', context)
 
 
