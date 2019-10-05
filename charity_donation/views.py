@@ -33,19 +33,21 @@ class AddDonationView(View):
             return redirect('/login')
 
     def post(self, request):
-        donation = DonationModel.objects.create(bag_quantity=request.POST['bags'],
-                                                categories=request.POST['categories'],
-                                                institution=request.POST['institution'],
-                                                address=request.POST['address'],
-                                                phone_number=request.POST['phone'],
-                                                city=request.POST['city'],
-                                                zip_code=request.POST['postcode'],
-                                                pick_up_date=request.POST['data'],
-                                                pick_up_time=request.POST['time'],
-                                                pick_up_comment=request.POST['more_info'],
-                                                user=request.user)
-        donation.save()
-        return redirect('/', {'confirmed': True})
+        institution = InstitutionModel.objects.filter(id=request.POST['institution'])
+        # donation = DonationModel.objects.create(bag_quantity=request.POST['bags'],
+        #                                         categories=request.POST['categories'],
+        #                                         institution=institution,
+        #                                         address=request.POST['address'],
+        #                                         phone_number=request.POST['phone'],
+        #                                         city=request.POST['city'],
+        #                                         zip_code=request.POST['postcode'],
+        #                                         pick_up_date=request.POST['data'],
+        #                                         pick_up_time=request.POST['time'],
+        #                                         pick_up_comment=request.POST['more_info'],
+        #                                         user=request.user)
+        # donation.save()
+        # return redirect('/', {'confirmed': True})
+        return render(request, 'test.html', {'inst': institution})
 
 
 class LoginView(View):
@@ -106,6 +108,3 @@ class ArchiveDonationView(View):
         donation.is_taken = True
         donation.save()
         return redirect('/profile')
-
-
-
